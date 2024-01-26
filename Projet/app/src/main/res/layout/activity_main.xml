@@ -10,7 +10,7 @@
         android:id="@+id/buttonClient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Client"
+        android:text="Client TCP"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         tools:ignore="HardcodedText" />
@@ -20,9 +20,30 @@
         android:id="@+id/buttonServer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Server"
+        android:text="Server TCP"
         android:layout_below="@id/buttonClient"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/buttonClientUDP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonServer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="74dp"
+        android:text="Client UDP"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/buttonServerUDP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Server UDP"
+        android:layout_below="@id/buttonClientUDP"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        tools:ignore="HardcodedText" />
+
 </RelativeLayout>

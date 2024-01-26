@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewPort"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="98dp"
+        android:layout_marginTop="40dp"
         android:text="Start Server" />
 
     <Button
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/buttonStartServer"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="329dp"
+        android:layout_marginTop="376dp"
         android:text="Back to Main" />
 
     <TextView

@@ -41,6 +41,18 @@
             android:label="Server"
             tools:ignore="Instantiatable" />
 
+        <activity
+            android:name=".ClientUDPActivity"
+            android:exported="true"
+            android:label="Client"
+            tools:ignore="Instantiatable" />
+
+        <activity
+            android:name=".ServerUDPActivity"
+            android:exported="true"
+            android:label="Client"
+            tools:ignore="Instantiatable" />
+
     </application>
 
 </manifest>

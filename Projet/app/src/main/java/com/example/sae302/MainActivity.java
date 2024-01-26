@@ -37,5 +37,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button buttonClientUDP = findViewById(R.id.buttonClientUDP);
+        buttonClientUDP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ClientUDPActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button buttonServerUDP = findViewById(R.id.buttonServerUDP);
+        buttonServerUDP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ServerUDPActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
