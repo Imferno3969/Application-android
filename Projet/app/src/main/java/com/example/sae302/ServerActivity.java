@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,6 +28,7 @@ public class ServerActivity extends AppCompatActivity {
     private Socket clientSocket;
     private BufferedReader inputReader;
     private OutputStream outputStream;
+    private boolean firstConnection = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,25 +77,32 @@ public class ServerActivity extends AppCompatActivity {
                         }
                     });
 
-                    clientSocket = serverSocket.accept();
-                    inputReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                    outputStream = clientSocket.getOutputStream();
-
                     while (serverRunning) {
-                        try {
+                        clientSocket = serverSocket.accept();
+                        inputReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                        outputStream = clientSocket.getOutputStream();
+
+                        final String clientAddress = clientSocket.getInetAddress().getHostAddress();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (firstConnection) {
+                                    textViewReceivedMessages.append("Client connected: " + clientAddress + "\n");
+                                    firstConnection = false;
+                                }
+                            }
+                        });
+
+                        while (serverRunning) {
                             final String receivedMessage = inputReader.readLine();
                             if (receivedMessage != null) {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        textViewServerStatus.setText("Received message: " + receivedMessage);
-                                        // Ajout du message reçu à la TextView
-                                        textViewReceivedMessages.append(receivedMessage + "\n");
+                                        textViewReceivedMessages.append(clientAddress + " : " + receivedMessage + "\n");
                                     }
                                 });
                             }
-                        } catch (IOException e) {
-                            e.printStackTrace();
                         }
                     }
 

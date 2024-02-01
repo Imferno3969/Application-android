@@ -49,6 +49,8 @@ public class ServerUDPActivity extends AppCompatActivity {
         });
     }
 
+    private boolean firstConnection = true;
+
     private void startUDPServer() {
         new Thread(new Runnable() {
             @Override
@@ -65,15 +67,21 @@ public class ServerUDPActivity extends AppCompatActivity {
                             textViewUDPIP.setText("IP Address: " + getLocalIpAddress());
                         }
                     });
-
                     while (true) {
                         DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
                         serverSocket.receive(receivePacket);
                         final String message = new String(receivePacket.getData(), 0, receivePacket.getLength());
+                        final String clientAddress = receivePacket.getAddress().getHostAddress();
+
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                textViewReceivedMessagesUDP.append(message + "\n");
+                                if (firstConnection) {
+                                    textViewReceivedMessagesUDP.append("Client connected: " + clientAddress + "\n");
+                                    firstConnection = false;
+                                } else {
+                                    textViewReceivedMessagesUDP.append(clientAddress + " : " + message + "\n");
+                                }
                             }
                         });
                     }
@@ -83,6 +91,7 @@ public class ServerUDPActivity extends AppCompatActivity {
             }
         }).start();
     }
+
 
     private String getLocalIpAddress() {
         try {

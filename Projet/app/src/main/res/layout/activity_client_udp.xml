@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/editTextUDPPort"
-        android:hint="IP Address" />
+        android:hint="Adresse IP" />
 
     <Button
         android:id="@+id/buttonConnectUDP"
@@ -29,7 +29,7 @@
         android:layout_below="@id/editTextUDPIP"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="Connect" />
+        android:text="Connecter" />
 
     <EditText
         android:id="@+id/editTextUDPMessage"
@@ -39,16 +39,16 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="4dp"
         android:layout_marginTop="195dp"
-        android:hint="Enter Message" />
+        android:hint="Entrer un Message" />
 
     <Button
         android:id="@+id/buttonSendUDPMessage"
-        android:layout_width="wrap_content"
+        android:layout_width="159dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/editTextUDPMessage"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="23dp"
-        android:text="Send Message" />
+        android:text="Envoyer un Message" />
 
     <Button
         android:id="@+id/buttonBackToMainUDP"
@@ -57,6 +57,6 @@
         android:layout_below="@id/buttonSendUDPMessage"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="-549dp"
-        android:text="Back to Main" />
+        android:text="Retour au menu" />
 
 </RelativeLayout>

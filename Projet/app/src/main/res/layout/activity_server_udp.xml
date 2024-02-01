@@ -10,9 +10,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="29dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
-        android:text="Server Status" />
+        android:text="Status Serveur" />
 
     <TextView
         android:id="@+id/textViewUDPPort"
@@ -20,9 +20,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewServerStatus"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="79dp"
-        android:layout_marginTop="8dp"
-        android:text="Port: " />
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="18dp"
+        android:text="Serveur Port: " />
 
     <TextView
         android:id="@+id/textViewUDPIP"
@@ -30,18 +30,18 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewUDPPort"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="39dp"
-        android:layout_marginTop="9dp"
-        android:text="IP Address: " />
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="17dp"
+        android:text="Serveur IP Address: " />
 
     <Button
         android:id="@+id/buttonStartUDPServer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Server"
         android:layout_below="@id/textViewUDPIP"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:text="Démarrer le Serveur" />
 
     <TextView
         android:id="@+id/textViewReceivedMessagesUDP"
@@ -49,9 +49,17 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/buttonStartUDPServer"
         android:layout_alignParentStart="true"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="42dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonStartUDPServer"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="24dp"
         android:layout_marginTop="18dp"
-        android:text="Received Messages:" />
+        android:text="Message reçu :" />
 
     <Button
         android:id="@+id/buttonBackToMainUDPServer"
@@ -60,6 +68,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="581dp"
-        android:text="Back to Main" />
+        android:text="Retour au menu" />
 
 </RelativeLayout>

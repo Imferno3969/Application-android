@@ -10,8 +10,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="132dp"
+        android:layout_marginEnd="274dp"
         android:text="Server IP Address: " />
 
     <TextView
@@ -20,9 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewIPAddress"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="11dp"
-        android:text="Server Port: " />
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="-51dp"
+        android:text="Serveur Port: " />
 
     <Button
         android:id="@+id/buttonStartServer"
@@ -31,7 +35,7 @@
         android:layout_below="@id/textViewPort"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:text="Start Server" />
+        android:text="Démarrer le Serveur" />
 
     <Button
         android:id="@+id/buttonBackToMain"
@@ -40,7 +44,7 @@
         android:layout_below="@id/buttonStartServer"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="376dp"
-        android:text="Back to Main" />
+        android:text="Retour au menu" />
 
     <TextView
         android:id="@+id/textViewReceivedMessages"
@@ -50,7 +54,17 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="47dp"
         android:layout_marginTop="-358dp"
-        android:text="Received Messages:"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonBackToMain"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="-383dp"
+        android:text="Messages reçu :"
         android:textStyle="bold" />
 
     <TextView
@@ -59,8 +73,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/buttonBackToMain"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="-605dp"
-        android:text="Server Status" />
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="-558dp"
+        android:text="Status Serveur" />
 
 </RelativeLayout>

@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:text="Back to Main" />
+        android:text="Retour au menu" />
 
     <EditText
         android:id="@+id/editTextPort"
@@ -21,7 +21,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="148dp"
-        android:hint="Enter Port" />
+        android:hint="Port" />
 
     <EditText
         android:id="@+id/editTextIPAddress"
@@ -31,7 +31,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="12dp"
-        android:hint="Enter IP Address" />
+        android:hint="Adresse IP" />
 
     <Button
         android:id="@+id/buttonConnect"
@@ -40,7 +40,7 @@
         android:layout_below="@id/editTextIPAddress"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="21dp"
-        android:text="Connect" />
+        android:text="Connecter" />
 
     <EditText
         android:id="@+id/editTextMessage"
@@ -49,7 +49,7 @@
         android:layout_below="@id/buttonConnect"
         android:layout_alignParentStart="true"
         android:layout_marginTop="202dp"
-        android:hint="Enter Message" />
+        android:hint="Entrer un Message" />
 
     <Button
         android:id="@+id/buttonSendMessage"
@@ -62,7 +62,7 @@
         android:layout_marginStart="125dp"
         android:layout_marginTop="27dp"
         android:layout_marginEnd="121dp"
-        android:text="Send Message" />
+        android:text="Envoyer un Message" />
 
     <TextView
         android:id="@+id/textViewStatus"

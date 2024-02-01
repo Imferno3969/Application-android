@@ -20,10 +20,10 @@
         android:id="@+id/buttonServer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Server TCP"
         android:layout_below="@id/buttonClient"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+        android:text="Serveur TCP"
         tools:ignore="HardcodedText" />
 
     <Button
@@ -40,10 +40,10 @@
         android:id="@+id/buttonServerUDP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Server UDP"
         android:layout_below="@id/buttonClientUDP"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+        android:text="Serveur UDP"
         tools:ignore="HardcodedText" />
 
 </RelativeLayout>
