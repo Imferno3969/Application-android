@@ -78,7 +78,7 @@ public class ClientActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            textViewStatus.setText("Connected to server");
+                            textViewStatus.setText("Connecter au server");
                         }
                     });
 
@@ -91,7 +91,7 @@ public class ClientActivity extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        textViewStatus.setText("Received message: " + receivedMessage);
+                                        textViewStatus.setText("Message reçu : " + receivedMessage);
                                     }
                                 });
                             }
@@ -101,7 +101,7 @@ public class ClientActivity extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    textViewStatus.setText("Connection lost");
+                                    textViewStatus.setText("Connexion perdu");
                                 }
                             });
                             connectionEstablished = false; // Terminer la boucle en cas d'erreur
@@ -113,7 +113,7 @@ public class ClientActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            textViewStatus.setText("Connection failed: " + e.getMessage());
+                            textViewStatus.setText("Erreur de connexion: " + e.getMessage());
                         }
                     });
                 }
@@ -135,7 +135,7 @@ public class ClientActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            textViewStatus.setText("Message sent");
+                            textViewStatus.setText("Message envoyé");
                         }
                     });
 
@@ -144,7 +144,7 @@ public class ClientActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            textViewStatus.setText("Failed to send message");
+                            textViewStatus.setText("Erreur envoie du message");
                         }
                     });
                 }

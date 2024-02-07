@@ -74,6 +74,9 @@ public class ServerActivity extends AppCompatActivity {
                             textViewIPAddress.setText("Server IP Address: " + getLocalIpAddress());
                             textViewPort.setText("Server Port: " + serverSocket.getLocalPort());
                             textViewServerStatus.setText("Server is running...");
+                            textViewIPAddress.setText("Adresse IP serveur : " + getLocalIpAddress());
+                            textViewPort.setText("Port serveur : " + serverSocket.getLocalPort());
+                            textViewServerStatus.setText("Status du serveur : en ligne...");
                         }
                     });
 

@@ -62,9 +62,9 @@ public class ServerUDPActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            textViewServerStatus.setText("Server is running...");
-                            textViewUDPPort.setText("Port: " + serverSocket.getLocalPort());
-                            textViewUDPIP.setText("IP Address: " + getLocalIpAddress());
+                            textViewServerStatus.setText("Status du server : en ligne...");
+                            textViewUDPPort.setText("Port serveur : " + serverSocket.getLocalPort());
+                            textViewUDPIP.setText("Adresse IP serveur: " + getLocalIpAddress());
                         }
                     });
                     while (true) {
@@ -77,7 +77,7 @@ public class ServerUDPActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 if (firstConnection) {
-                                    textViewReceivedMessagesUDP.append("Client connected: " + clientAddress + "\n");
+                                    textViewReceivedMessagesUDP.append("Client connecté : " + clientAddress + "\n");
                                     firstConnection = false;
                                 } else {
                                     textViewReceivedMessagesUDP.append(clientAddress + " : " + message + "\n");

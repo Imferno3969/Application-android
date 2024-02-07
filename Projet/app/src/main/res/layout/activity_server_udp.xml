@@ -12,7 +12,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
-        android:text="Status Serveur" />
+        android:text="Status du Serveur :" />
 
     <TextView
         android:id="@+id/textViewUDPPort"
@@ -22,7 +22,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="49dp"
         android:layout_marginTop="18dp"
-        android:text="Serveur Port: " />
+        android:text="Port serveur : " />
 
     <TextView
         android:id="@+id/textViewUDPIP"
@@ -32,7 +32,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="7dp"
         android:layout_marginTop="17dp"
-        android:text="Serveur IP Address: " />
+        android:text="Adresse IP serveur : " />
 
     <Button
         android:id="@+id/buttonStartUDPServer"

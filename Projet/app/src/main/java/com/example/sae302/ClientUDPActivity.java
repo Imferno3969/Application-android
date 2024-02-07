@@ -71,7 +71,7 @@ public class ClientUDPActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(ClientUDPActivity.this, "Connected to UDP Server", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ClientUDPActivity.this, "Connecter au Server UDP", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } catch (Exception e) {
@@ -101,7 +101,7 @@ public class ClientUDPActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(ClientUDPActivity.this, "Message sent to UDP Server", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ClientUDPActivity.this, "Message envoyer au Server UDP", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } catch (Exception e) {
