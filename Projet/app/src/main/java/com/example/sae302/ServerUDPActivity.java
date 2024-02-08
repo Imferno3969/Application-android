@@ -62,7 +62,7 @@ public class ServerUDPActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            textViewServerStatus.setText("Status du server : en ligne...");
+                            textViewServerStatus.setText("Status du serveur : en ligne...");
                             textViewUDPPort.setText("Port serveur : " + serverSocket.getLocalPort());
                             textViewUDPIP.setText("Adresse IP serveur: " + getLocalIpAddress());
                         }

@@ -25,9 +25,6 @@ public class ServerActivity extends AppCompatActivity {
 
     private boolean serverRunning = false;
     private ServerSocket serverSocket;
-    private Socket clientSocket;
-    private BufferedReader inputReader;
-    private OutputStream outputStream;
     private boolean firstConnection = true;
 
     @Override
@@ -71,9 +68,6 @@ public class ServerActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            textViewIPAddress.setText("Server IP Address: " + getLocalIpAddress());
-                            textViewPort.setText("Server Port: " + serverSocket.getLocalPort());
-                            textViewServerStatus.setText("Server is running...");
                             textViewIPAddress.setText("Adresse IP serveur : " + getLocalIpAddress());
                             textViewPort.setText("Port serveur : " + serverSocket.getLocalPort());
                             textViewServerStatus.setText("Status du serveur : en ligne...");
@@ -81,33 +75,21 @@ public class ServerActivity extends AppCompatActivity {
                     });
 
                     while (serverRunning) {
-                        clientSocket = serverSocket.accept();
-                        inputReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                        outputStream = clientSocket.getOutputStream();
+                        Socket clientSocket = serverSocket.accept();
+                        // Create a new thread to handle each client
+                        Thread clientThread = new Thread(new ClientHandler(clientSocket));
+                        clientThread.start();
 
+                        // Afficher une notification lorsque le client se connecte
                         final String clientAddress = clientSocket.getInetAddress().getHostAddress();
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                if (firstConnection) {
-                                    textViewReceivedMessages.append("Client connected: " + clientAddress + "\n");
-                                    firstConnection = false;
-                                }
+                                textViewReceivedMessages.append("Client connecté: " + clientAddress + "\n");
                             }
                         });
-
-                        while (serverRunning) {
-                            final String receivedMessage = inputReader.readLine();
-                            if (receivedMessage != null) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        textViewReceivedMessages.append(clientAddress + " : " + receivedMessage + "\n");
-                                    }
-                                });
-                            }
-                        }
                     }
+
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -122,9 +104,6 @@ public class ServerActivity extends AppCompatActivity {
         try {
             if (serverSocket != null && !serverSocket.isClosed()) {
                 serverSocket.close();
-            }
-            if (clientSocket != null && !clientSocket.isClosed()) {
-                clientSocket.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -155,5 +134,59 @@ public class ServerActivity extends AppCompatActivity {
             }
         }
         return null;
+    }
+
+    // Inner class to handle each client in a separate thread
+    private class ClientHandler implements Runnable {
+        private Socket clientSocket;
+
+        public ClientHandler(Socket clientSocket) {
+            this.clientSocket = clientSocket;
+        }
+
+        @Override
+        public void run() {
+            BufferedReader inputReader = null;
+            try {
+                inputReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                final String clientAddress = clientSocket.getInetAddress().getHostAddress();
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (firstConnection) {
+
+                            firstConnection = false;
+                        }
+                    }
+                });
+
+                while (serverRunning) {
+                    final String receivedMessage = inputReader.readLine();
+                    if (receivedMessage != null) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                textViewReceivedMessages.append(clientAddress + " : " + receivedMessage + "\n");
+                            }
+                        });
+                    }
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (inputReader != null) {
+                        inputReader.close();
+                    }
+                    if (clientSocket != null && !clientSocket.isClosed()) {
+                        clientSocket.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
