@@ -50,6 +50,24 @@
         <activity
             android:name=".ServerUDPActivity"
             android:exported="true"
+            android:label="Server"
+            tools:ignore="Instantiatable" />
+
+        <activity
+            android:name=".TetrisClientActivity"
+            android:exported="true"
+            android:label="Client"
+            tools:ignore="Instantiatable" />
+
+        <activity
+            android:name=".ServerTetrisActivity"
+            android:exported="true"
+            android:label="Server"
+            tools:ignore="Instantiatable" />
+
+        <activity
+            android:name=".JeuActivity"
+            android:exported="true"
             android:label="Client"
             tools:ignore="Instantiatable" />
 

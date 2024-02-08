@@ -2,6 +2,7 @@ package com.example.sae302;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button buttonOpenURL = findViewById(R.id.buttonOpenURL);
+        buttonOpenURL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = "http://bastenier-edouard.fr";
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+            }
+        });
 
         // Récupérer le bouton Client
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button buttonClient = findViewById(R.id.buttonClient);
@@ -38,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Récupérer le bouton Client UDP
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button buttonClientUDP = findViewById(R.id.buttonClientUDP);
         buttonClientUDP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,11 +60,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Récupérer le bouton Server UDP
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button buttonServerUDP = findViewById(R.id.buttonServerUDP);
         buttonServerUDP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ServerUDPActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // Bouton pour aller sur le serveur Tetris
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button buttonTetrisServer = findViewById(R.id.buttonTetrisServer);
+        buttonTetrisServer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, JeuActivity.class);
                 startActivity(intent);
             }
         });

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- Bouton pour ouvrir l'activité Client -->
+    <!-- Boutton pour ouvrir l'activité Client -->
     <Button
         android:id="@+id/buttonClient"
         android:layout_width="wrap_content"
@@ -15,7 +15,7 @@
         android:layout_marginTop="50dp"
         tools:ignore="HardcodedText" />
 
-    <!-- Bouton pour ouvrir l'activité Server -->
+    <!-- Boutton pour ouvrir l'activité Server -->
     <Button
         android:id="@+id/buttonServer"
         android:layout_width="wrap_content"
@@ -45,5 +45,26 @@
         android:layout_marginTop="20dp"
         android:text="Serveur UDP"
         tools:ignore="HardcodedText" />
+
+    <!-- Boutton pour aller sur le client Tetris -->
+    <Button
+        android:id="@+id/buttonTetrisServer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonServerUDP"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="104dp"
+        android:text="Jeu"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/buttonOpenURL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="135dp"
+        android:text="Mon site internet" />
+
 
 </RelativeLayout>

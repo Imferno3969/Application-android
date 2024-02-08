@@ -6,6 +6,15 @@
     tools:context=".ServerActivity">
 
     <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="Server TCP" />
+
+    <TextView
         android:id="@+id/textViewIPAddress"
         android:layout_width="168dp"
         android:layout_height="47dp"

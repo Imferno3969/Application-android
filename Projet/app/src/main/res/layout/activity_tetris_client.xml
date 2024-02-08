@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ClientUDPActivity">
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:text="Client UDP" />
 
     <EditText
         android:id="@+id/editTextUDPPort"
@@ -20,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="126dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="52dp"
         android:hint="Port" />
 
     <EditText
@@ -37,35 +29,47 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/editTextUDPIP"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="23dp"
         android:text="Connecter" />
 
     <EditText
         android:id="@+id/editTextUDPMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttonConnectUDP"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="195dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginBottom="63dp"
         android:hint="Entrer un Message" />
 
     <Button
         android:id="@+id/buttonSendUDPMessage"
         android:layout_width="159dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextUDPMessage"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="23dp"
+        android:layout_marginBottom="131dp"
         android:text="Envoyer un Message" />
 
     <Button
         android:id="@+id/buttonBackToMainUDP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttonSendUDPMessage"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-557dp"
+        android:layout_marginTop="673dp"
+        android:layout_marginBottom="10dp"
         android:text="Retour au menu" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="127dp"
+        android:layout_height="115dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="266dp"
+        app:srcCompat="@android:drawable/ic_menu_myplaces" />
 
 </RelativeLayout>
