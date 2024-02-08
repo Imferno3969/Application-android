@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.InetAddress;
@@ -151,25 +150,32 @@ public class ServerActivity extends AppCompatActivity {
                 inputReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 final String clientAddress = clientSocket.getInetAddress().getHostAddress();
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (firstConnection) {
-
-                            firstConnection = false;
-                        }
-                    }
-                });
-
                 while (serverRunning) {
                     final String receivedMessage = inputReader.readLine();
                     if (receivedMessage != null) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                textViewReceivedMessages.append(clientAddress + " : " + receivedMessage + "\n");
-                            }
-                        });
+                        // Check if the message starts with '[' or '{'
+                        if (receivedMessage.trim().startsWith("[") || receivedMessage.trim().startsWith("{")) {
+                            // Skip processing this message, as it's in a special format
+                            continue;
+                        } else if (receivedMessage.trim().startsWith("\"")) {
+                            // Remove all '"' characters from the message
+                            final String modifiedMessage = receivedMessage.replaceAll("\"", "");
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    textViewReceivedMessages.append(clientAddress + " : " + modifiedMessage + "\n");
+                                }
+                            });
+                        } else {
+                            // Remove all '{', '}', ';', and ',' characters from the message
+                            final String modifiedMessage = receivedMessage.replaceAll("[{};,]", "");
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    textViewReceivedMessages.append(clientAddress + " : " + modifiedMessage + "\n");
+                                }
+                            });
+                        }
                     }
                 }
 
@@ -188,5 +194,6 @@ public class ServerActivity extends AppCompatActivity {
                 }
             }
         }
+
     }
 }

@@ -50,8 +50,8 @@
 
     <TextView
         android:id="@+id/textViewReceivedMessages"
-        android:layout_width="301dp"
-        android:layout_height="295dp"
+        android:layout_width="328dp"
+        android:layout_height="220dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="49dp"
