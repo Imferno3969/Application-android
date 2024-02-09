@@ -70,15 +70,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Bouton pour aller sur le serveur Tetris
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button buttonTetrisServer = findViewById(R.id.buttonTetrisServer);
-        buttonTetrisServer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, JeuActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
 }
