@@ -1,0 +1,158 @@
+package com.example.sae302;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.Socket;
+
+public class ClientActivity extends AppCompatActivity {
+
+    // Déclaration des éléments de l'interface utilisateur
+    private EditText editTextPort;
+    private EditText editTextIPAddress;
+    private Button buttonConnect;
+    private EditText editTextMessage;
+    private Button buttonSendMessage;
+    private TextView textViewStatus;
+
+    // Déclaration des objets de communication réseau
+    private Socket clientSocket;
+    private BufferedReader inputReader;
+    private OutputStream outputStream;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_client);
+
+        // Liaison des éléments de l'interface utilisateur avec les vues XML
+        editTextPort = findViewById(R.id.editTextPort);
+        editTextIPAddress = findViewById(R.id.editTextIPAddress);
+        buttonConnect = findViewById(R.id.buttonConnect);
+        editTextMessage = findViewById(R.id.editTextMessage);
+        buttonSendMessage = findViewById(R.id.buttonSendMessage);
+        textViewStatus = findViewById(R.id.textViewStatus);
+
+        // Définition des écouteurs pour les boutons
+        buttonConnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                connectToServer(); // Fonction de connexion au serveur
+            }
+        });
+
+        buttonSendMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendMessage(); // Fonction d'envoi de message
+            }
+        });
+
+        // Ajout du bouton pour revenir à la page principale
+        Button buttonBackToMain = findViewById(R.id.buttonBackToMain);
+        buttonBackToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish(); // Ferme l'activité actuelle pour revenir à la principale
+            }
+        });
+    }
+
+    // Fonction pour établir la connexion avec le serveur
+    private void connectToServer() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                boolean connectionEstablished = false;
+
+                try {
+                    int port = Integer.parseInt(editTextPort.getText().toString());
+                    String ipAddress = editTextIPAddress.getText().toString();
+
+                    clientSocket = new Socket(ipAddress, port);
+                    inputReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                    outputStream = clientSocket.getOutputStream();
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            textViewStatus.setText("Connecté au serveur");
+                        }
+                    });
+
+                    connectionEstablished = true;
+
+                    while (connectionEstablished) {
+                        try {
+                            final String receivedMessage = inputReader.readLine();
+                            if (receivedMessage != null) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        textViewStatus.setText("Message reçu : " + receivedMessage);
+                                    }
+                                });
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            // Gérer la déconnexion du client ici
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    textViewStatus.setText("Connexion perdue");
+                                }
+                            });
+                            connectionEstablished = false; // Terminer la boucle en cas d'erreur
+                        }
+                    }
+
+                } catch (final IOException e) {
+                    e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            textViewStatus.setText("Erreur de connexion: " + e.getMessage());
+                        }
+                    });
+                }
+            }
+        }).start();
+    }
+
+    // Fonction pour envoyer un message au serveur
+    private void sendMessage() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String message = editTextMessage.getText().toString();
+                    outputStream.write((message + "\n").getBytes());
+                    outputStream.flush();
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            textViewStatus.setText("Message envoyé");
+                        }
+                    });
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            textViewStatus.setText("Erreur lors de l'envoi du message");
+                        }
+                    });
+                }
+            }
+        }).start();
+    }
+}

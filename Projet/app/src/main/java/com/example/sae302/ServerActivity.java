@@ -14,14 +14,15 @@ import java.net.InetAddress;
 
 public class ServerActivity extends AppCompatActivity {
 
+    // Déclaration des éléments de l'interface utilisateur
     private Button buttonStartServer;
     private TextView textViewIPAddress;
     private TextView textViewPort;
     private Button buttonBackToMain;
     private TextView textViewServerStatus;
-    // Déclaration de la TextView pour afficher les messages reçus
-    private TextView textViewReceivedMessages;
+    private TextView textViewReceivedMessages; // Déclaration de la TextView pour afficher les messages reçus
 
+    // Variables pour le serveur
     private boolean serverRunning = false;
     private ServerSocket serverSocket;
     private boolean firstConnection = true;
@@ -31,19 +32,20 @@ public class ServerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_server);
 
+        // Liaison des éléments de l'interface utilisateur avec les vues XML
         buttonStartServer = findViewById(R.id.buttonStartServer);
         textViewIPAddress = findViewById(R.id.textViewIPAddress);
         textViewPort = findViewById(R.id.textViewPort);
         buttonBackToMain = findViewById(R.id.buttonBackToMain);
         textViewServerStatus = findViewById(R.id.textViewServerStatus);
-        // Initialisation de la TextView pour afficher les messages reçus
-        textViewReceivedMessages = findViewById(R.id.textViewReceivedMessages);
+        textViewReceivedMessages = findViewById(R.id.textViewReceivedMessages); // Initialisation de la TextView pour afficher les messages reçus
 
+        // Définition des écouteurs pour les boutons
         buttonStartServer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!serverRunning) {
-                    startServer();
+                    startServer(); // Démarrer le serveur
                 }
             }
         });
@@ -51,17 +53,18 @@ public class ServerActivity extends AppCompatActivity {
         buttonBackToMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                finish(); // Fermer l'activité pour revenir à l'activité principale
             }
         });
     }
 
+    // Fonction pour démarrer le serveur
     private void startServer() {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    serverSocket = new ServerSocket(0);
+                    serverSocket = new ServerSocket(0); // Création d'une socket serveur sur un port disponible
                     serverRunning = true;
 
                     runOnUiThread(new Runnable() {
@@ -69,17 +72,17 @@ public class ServerActivity extends AppCompatActivity {
                         public void run() {
                             textViewIPAddress.setText("Adresse IP serveur : " + getLocalIpAddress());
                             textViewPort.setText("Port serveur : " + serverSocket.getLocalPort());
-                            textViewServerStatus.setText("Status du serveur : en ligne...");
+                            textViewServerStatus.setText("Statut du serveur : en ligne...");
                         }
                     });
 
                     while (serverRunning) {
-                        Socket clientSocket = serverSocket.accept();
-                        // Create a new thread to handle each client
+                        Socket clientSocket = serverSocket.accept(); // Attente d'une connexion client
+                        // Création d'un nouveau thread pour gérer chaque client
                         Thread clientThread = new Thread(new ClientHandler(clientSocket));
                         clientThread.start();
 
-                        // Afficher une notification lorsque le client se connecte
+                        // Affichage d'une notification lorsque le client se connecte
                         final String clientAddress = clientSocket.getInetAddress().getHostAddress();
                         runOnUiThread(new Runnable() {
                             @Override
@@ -89,16 +92,16 @@ public class ServerActivity extends AppCompatActivity {
                         });
                     }
 
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
-                    closeServerSocket();
+                    closeServerSocket(); // Fermeture de la socket serveur
                 }
             }
         }).start();
     }
 
+    // Fonction pour fermer la socket serveur
     private void closeServerSocket() {
         try {
             if (serverSocket != null && !serverSocket.isClosed()) {
@@ -109,6 +112,7 @@ public class ServerActivity extends AppCompatActivity {
         }
     }
 
+    // Fonction pour obtenir l'adresse IP locale du périphérique
     private String getLocalIpAddress() {
         try {
             InetAddress inetAddress = getWifiInetAddress();
@@ -121,6 +125,7 @@ public class ServerActivity extends AppCompatActivity {
         return null;
     }
 
+    // Fonction pour obtenir l'adresse IP locale via la connexion Wi-Fi
     private InetAddress getWifiInetAddress() {
         android.net.wifi.WifiManager wifiManager = (android.net.wifi.WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
         android.net.DhcpInfo dhcpInfo = wifiManager.getDhcpInfo();
@@ -135,7 +140,7 @@ public class ServerActivity extends AppCompatActivity {
         return null;
     }
 
-    // Inner class to handle each client in a separate thread
+    // Classe interne pour gérer chaque client dans un thread séparé
     private class ClientHandler implements Runnable {
         private Socket clientSocket;
 
@@ -153,12 +158,12 @@ public class ServerActivity extends AppCompatActivity {
                 while (serverRunning) {
                     final String receivedMessage = inputReader.readLine();
                     if (receivedMessage != null) {
-                        // Check if the message starts with '[' or '{'
+                        // Vérifier si le message commence par '[' ou '{'
                         if (receivedMessage.trim().startsWith("[") || receivedMessage.trim().startsWith("{")) {
-                            // Skip processing this message, as it's in a special format
+                            // Ignorer le traitement de ce message, car il est dans un format spécial
                             continue;
                         } else if (receivedMessage.trim().startsWith("\"")) {
-                            // Remove all '"' characters from the message
+                            // Supprimer tous les caractères '"' du message
                             final String modifiedMessage = receivedMessage.replaceAll("\"", "");
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -167,7 +172,7 @@ public class ServerActivity extends AppCompatActivity {
                                 }
                             });
                         } else {
-                            // Remove all '{', '}', ';', and ',' characters from the message
+                            // Supprimer tous les caractères '{', '}', ';', et ',' du message
                             final String modifiedMessage = receivedMessage.replaceAll("[{};,]", "");
                             runOnUiThread(new Runnable() {
                                 @Override

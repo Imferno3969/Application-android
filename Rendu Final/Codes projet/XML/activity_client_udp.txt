@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ClientUDPActivity">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="Client UDP" />
+
+    <EditText
+        android:id="@+id/editTextUDPPort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="126dp"
+        android:hint="Port" />
+
+    <EditText
+        android:id="@+id/editTextUDPIP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextUDPPort"
+        android:hint="Adresse IP" />
+
+    <Button
+        android:id="@+id/buttonConnectUDP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextUDPIP"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Connecter" />
+
+    <EditText
+        android:id="@+id/editTextUDPMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonConnectUDP"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="195dp"
+        android:hint="Entrer un Message" />
+
+    <Button
+        android:id="@+id/buttonSendUDPMessage"
+        android:layout_width="159dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextUDPMessage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:text="Envoyer un Message" />
+
+    <Button
+        android:id="@+id/buttonBackToMainUDP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonSendUDPMessage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-557dp"
+        android:text="Retour au menu" />
+
+</RelativeLayout>

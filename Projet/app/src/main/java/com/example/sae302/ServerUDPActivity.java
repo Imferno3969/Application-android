@@ -15,11 +15,14 @@ import java.util.Enumeration;
 
 public class ServerUDPActivity extends AppCompatActivity {
 
+    // Déclaration des éléments de l'interface utilisateur
     private TextView textViewServerStatus;
     private TextView textViewUDPPort;
     private TextView textViewUDPIP;
     private TextView textViewReceivedMessagesUDP;
 
+    // Variables pour le serveur UDP
+    private boolean firstConnection = true;
     private DatagramSocket serverSocket;
 
     @Override
@@ -27,16 +30,18 @@ public class ServerUDPActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_server_udp);
 
+        // Liaison des éléments de l'interface utilisateur avec les vues XML
         textViewServerStatus = findViewById(R.id.textViewServerStatus);
         textViewUDPPort = findViewById(R.id.textViewUDPPort);
         textViewUDPIP = findViewById(R.id.textViewUDPIP);
         textViewReceivedMessagesUDP = findViewById(R.id.textViewReceivedMessagesUDP);
 
+        // Définition des écouteurs pour les boutons
         Button buttonStartUDPServer = findViewById(R.id.buttonStartUDPServer);
         buttonStartUDPServer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startUDPServer();
+                startUDPServer(); // Démarrer le serveur UDP
             }
         });
 
@@ -44,13 +49,12 @@ public class ServerUDPActivity extends AppCompatActivity {
         buttonBackToMainUDPServer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                finish(); // Fermer l'activité pour revenir à l'activité principale
             }
         });
     }
 
-    private boolean firstConnection = true;
-
+    // Fonction pour démarrer le serveur UDP
     private void startUDPServer() {
         new Thread(new Runnable() {
             @Override
@@ -62,14 +66,15 @@ public class ServerUDPActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            textViewServerStatus.setText("Status du serveur : en ligne...");
+                            textViewServerStatus.setText("Statut du serveur : en ligne...");
                             textViewUDPPort.setText("Port serveur : " + serverSocket.getLocalPort());
                             textViewUDPIP.setText("Adresse IP serveur: " + getLocalIpAddress());
                         }
                     });
+
                     while (true) {
                         DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
-                        serverSocket.receive(receivePacket);
+                        serverSocket.receive(receivePacket); // Attend la réception de paquets
                         final String message = new String(receivePacket.getData(), 0, receivePacket.getLength());
                         final String clientAddress = receivePacket.getAddress().getHostAddress();
 
@@ -92,7 +97,7 @@ public class ServerUDPActivity extends AppCompatActivity {
         }).start();
     }
 
-
+    // Fonction pour obtenir l'adresse IP locale du périphérique
     private String getLocalIpAddress() {
         try {
             for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
@@ -110,11 +115,12 @@ public class ServerUDPActivity extends AppCompatActivity {
         return null;
     }
 
+    // Méthode appelée lors de la destruction de l'activité
     @Override
     protected void onDestroy() {
         super.onDestroy();
         if (serverSocket != null && !serverSocket.isClosed()) {
-            serverSocket.close();
+            serverSocket.close(); // Ferme la socket du serveur UDP si elle est ouverte
         }
     }
 }

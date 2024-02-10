@@ -14,6 +14,7 @@ import java.net.Socket;
 
 public class ClientActivity extends AppCompatActivity {
 
+    // Déclaration des éléments de l'interface utilisateur
     private EditText editTextPort;
     private EditText editTextIPAddress;
     private Button buttonConnect;
@@ -21,6 +22,7 @@ public class ClientActivity extends AppCompatActivity {
     private Button buttonSendMessage;
     private TextView textViewStatus;
 
+    // Déclaration des objets de communication réseau
     private Socket clientSocket;
     private BufferedReader inputReader;
     private OutputStream outputStream;
@@ -30,6 +32,7 @@ public class ClientActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client);
 
+        // Liaison des éléments de l'interface utilisateur avec les vues XML
         editTextPort = findViewById(R.id.editTextPort);
         editTextIPAddress = findViewById(R.id.editTextIPAddress);
         buttonConnect = findViewById(R.id.buttonConnect);
@@ -37,21 +40,22 @@ public class ClientActivity extends AppCompatActivity {
         buttonSendMessage = findViewById(R.id.buttonSendMessage);
         textViewStatus = findViewById(R.id.textViewStatus);
 
+        // Définition des écouteurs pour les boutons
         buttonConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                connectToServer();
+                connectToServer(); // Fonction de connexion au serveur
             }
         });
 
         buttonSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendMessage();
+                sendMessage(); // Fonction d'envoi de message
             }
         });
 
-        // Ajouter le bouton pour revenir à la page principale
+        // Ajout du bouton pour revenir à la page principale
         Button buttonBackToMain = findViewById(R.id.buttonBackToMain);
         buttonBackToMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +65,7 @@ public class ClientActivity extends AppCompatActivity {
         });
     }
 
+    // Fonction pour établir la connexion avec le serveur
     private void connectToServer() {
         new Thread(new Runnable() {
             @Override
@@ -78,7 +83,7 @@ public class ClientActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            textViewStatus.setText("Connecter au server");
+                            textViewStatus.setText("Connecté au serveur");
                         }
                     });
 
@@ -101,7 +106,7 @@ public class ClientActivity extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    textViewStatus.setText("Connexion perdu");
+                                    textViewStatus.setText("Connexion perdue");
                                 }
                             });
                             connectionEstablished = false; // Terminer la boucle en cas d'erreur
@@ -121,8 +126,7 @@ public class ClientActivity extends AppCompatActivity {
         }).start();
     }
 
-
-
+    // Fonction pour envoyer un message au serveur
     private void sendMessage() {
         new Thread(new Runnable() {
             @Override
@@ -144,7 +148,7 @@ public class ClientActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            textViewStatus.setText("Erreur envoie du message");
+                            textViewStatus.setText("Erreur lors de l'envoi du message");
                         }
                     });
                 }
